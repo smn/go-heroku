@@ -3,6 +3,7 @@ import requests
 import json
 
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def reply(message_id, content, session_event="resume"):
@@ -22,6 +23,7 @@ def reply(message_id, content, session_event="resume"):
         data=json.dumps(payload))
 
 
+@csrf_exempt
 def messages(request):
     if request.method == 'POST':
         received_message = json.loads(request.body)
